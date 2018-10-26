@@ -5,8 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TodoList"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="TODO List" Height="450" Width="800">
+    <!--<Grid>-->
+    <DockPanel LastChildFill="True">
+        <DockPanel LastChildFill="True">
+            <Grid DockPanel.Dock="Bottom" Margin="8,0,8,8">
+                <Button x:Name="add" Width="60" HorizontalAlignment="Left">Add</Button>
+                <Button x:Name="delete" Width="60" HorizontalAlignment="Right">Delete</Button>
+            </Grid>
+            <ListView x:Name="todoList" Width="200" Margin="0,0,0,16"></ListView>
+        </DockPanel>
+        <Grid x:Name="details" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="35*"/>
+                <ColumnDefinition Width="251*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="52*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="TODO:" TextAlignment="Center" Height="16" />
+            <TextBox x:Name="todoText" Grid.Column="1" Height="18" />
+
+            <TextBlock Text="Done?" TextAlignment="Center"  VerticalAlignment="Top" Grid.Row="1" Height="16" />
+            <CheckBox x:Name="isDoneCheckbox" Grid.Row="1" Grid.Column="1">
+            </CheckBox>
+        </Grid>
+    </DockPanel>
+    <!--</Grid>-->
 </Window>
