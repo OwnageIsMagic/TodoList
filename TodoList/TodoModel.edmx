@@ -13,10 +13,11 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Done" Type="bit" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Done" Type="bit" Nullable="false" DefaultValue="false" />
     <Property Name="DateAdd" Type="datetime" Nullable="false" />
-    <Property Name="DateComplete" Type="datetime" Nullable="false" />
+    <Property Name="DateComplete" Type="datetime" Nullable="true" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -30,10 +31,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Text" Type="String" Nullable="false" Unicode="true" />
-          <Property Name="Done" Type="Boolean" Nullable="false" />
+          <Property Name="Text" Type="String" Unicode="true" Nullable="true" />
+          <Property Name="Done" Type="Boolean" Nullable="false" DefaultValue="FALSE" />
           <Property Name="DateAdd" Type="DateTime" Nullable="false" />
-          <Property Name="DateComplete" Type="DateTime" Nullable="false" />
+          <Property Name="DateComplete" Type="DateTime" Nullable="true" />
+          <Property Name="Name" Type="String" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -49,6 +51,7 @@
           <ScalarProperty Name="Done" ColumnName="Done" />
           <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
           <ScalarProperty Name="DateComplete" ColumnName="DateComplete" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -14,10 +14,17 @@ namespace TodoList
     
     public partial class Note
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Note()
+        {
+            this.Done = false;
+        }
+    
         public int Id { get; set; }
         public string Text { get; set; }
         public bool Done { get; set; }
         public System.DateTime DateAdd { get; set; }
-        public System.DateTime DateComplete { get; set; }
+        public Nullable<System.DateTime> DateComplete { get; set; }
+        public string Name { get; set; }
     }
 }

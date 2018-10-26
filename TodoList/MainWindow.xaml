@@ -5,17 +5,49 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TodoList"
         mc:Ignorable="d"
-        Title="TODO List" Height="450" Width="800">
+        Title="TODO List" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="noteViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Note}, CreateList=True}"/>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="3"/>
+            <!--<Setter Property="Height" Value="40"/>-->
+        </Style>
+        <Style x:Key="CustTextBox" TargetType="{x:Type TextBox}" BasedOn="{x:Null}">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="Height" Value="23"/>
+            <Setter Property="Width" Value="120"/>
+        </Style>
+        <Style x:Key="CustDatePicker" TargetType="{x:Type DatePicker}" BasedOn="{x:Null}">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="Height" Value="23"/>
+            <Setter Property="Width" Value="120"/>
+        </Style>
+        <Style x:Key="CustCheckBox" TargetType="{x:Type CheckBox}" BasedOn="{x:Null}">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="3"/>
+            <!--<Setter Property="Height" Value="23"/>-->
+            <!--<Setter Property="Width" Value="120"/>-->
+        </Style>
+    </Window.Resources>
     <!--<Grid>-->
     <DockPanel LastChildFill="True">
-        <DockPanel LastChildFill="True">
+        <DockPanel LastChildFill="True" >
             <Grid DockPanel.Dock="Bottom" Margin="8,0,8,8">
-                <Button x:Name="add" Width="60" HorizontalAlignment="Left">Add</Button>
-                <Button x:Name="delete" Width="60" HorizontalAlignment="Right">Delete</Button>
+                <Button x:Name="add" Width="60" HorizontalAlignment="Left" Click="add_Click">Add</Button>
+                <Button x:Name="delete" Width="60" HorizontalAlignment="Right" Click="delete_Click">Delete</Button>
             </Grid>
-            <ListView x:Name="todoList" Width="200" Margin="0,0,0,16"></ListView>
+            <ListBox x:Name="todoList" Width="200" Margin="0,0,0,16" DataContext="{StaticResource noteViewSource}" ItemsSource="{Binding}" DisplayMemberPath="Name" SelectedValuePath="Id">
+                <!--<ListBox.-->
+            </ListBox>
         </DockPanel>
-        <Grid x:Name="details" Margin="10">
+        <!--<Grid x:Name="details" Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="35*"/>
                 <ColumnDefinition Width="251*"/>
@@ -29,8 +61,40 @@
 
             <TextBlock Text="Done?" TextAlignment="Center"  VerticalAlignment="Top" Grid.Row="1" Height="16" />
             <CheckBox x:Name="isDoneCheckbox" Grid.Row="1" Grid.Column="1">
-            </CheckBox>
+            </CheckBox>-->
+        <Grid x:Name="grid1" DataContext="{StaticResource noteViewSource}" HorizontalAlignment="Left" Margin="2,31,0,0" Grid.RowSpan="2" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="Date Add:" Grid.Column="0"  Grid.Row="0"/>
+            <DatePicker x:Name="dateAddDatePicker" Style="{StaticResource CustDatePicker}" Grid.Column="1" Grid.Row="0" 
+                        SelectedDate="{Binding DateAdd, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label Content="Date Complete:" Grid.Column="0" Grid.Row="1"/>
+            <DatePicker x:Name="dateCompleteDatePicker" Style="{StaticResource CustDatePicker}" Grid.Column="1" Grid.Row="1" 
+                        SelectedDate="{Binding DateComplete, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label Content="Done:" Grid.Column="0" Grid.Row="2"/>
+            <CheckBox x:Name="doneCheckBox" Style="{StaticResource CustCheckBox}" Grid.Column="1" Grid.Row="2" 
+                      IsChecked="{Binding Done, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label Content="Id:" Grid.Column="0" Grid.Row="3"/>
+            <TextBox x:Name="idTextBox" Style="{StaticResource CustTextBox}" Grid.Column="1" Grid.Row="3" 
+                     Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label Content="Name:" Grid.Column="0" Grid.Row="4"/>
+            <TextBox x:Name="nameTextBox" Style="{StaticResource CustTextBox}" Grid.Column="1" Grid.Row="4" 
+                     Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label Content="Text:" Grid.Column="0" Grid.Row="5"/>
+            <TextBox x:Name="textTextBox" Style="{StaticResource CustTextBox}" Grid.Column="1" Grid.Row="5" 
+                     Text="{Binding Text, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
         </Grid>
+        <!--</Grid>-->
     </DockPanel>
     <!--</Grid>-->
 </Window>

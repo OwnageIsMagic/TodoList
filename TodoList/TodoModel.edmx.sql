@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/26/2018 19:01:31
+-- Date Created: 10/26/2018 19:50:39
 -- Generated from EDMX file: D:\Source\TodoList\TodoList\TodoModel.edmx
 -- --------------------------------------------------
 
@@ -33,10 +33,11 @@ GO
 -- Creating table 'Notes'
 CREATE TABLE [dbo].[Notes] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Text] nvarchar(max)  NOT NULL,
+    [Text] nvarchar(max)  NULL,
     [Done] bit  NOT NULL,
     [DateAdd] datetime  NOT NULL,
-    [DateComplete] datetime  NOT NULL
+    [DateComplete] datetime  NULL,
+    [Name] nvarchar(max)  NOT NULL
 );
 GO
 
