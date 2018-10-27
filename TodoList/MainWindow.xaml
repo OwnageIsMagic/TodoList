@@ -14,7 +14,7 @@
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
         <local:BoolToDoneConverter x:Key="BoolToDoneConverter" />
-        
+
         <Style TargetType="{x:Type Label}">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -43,8 +43,7 @@
             <!--<Setter Property="Width" Value="120"/>-->
         </Style>
     </Window.Resources>
-    <!--</Grid>-->
-    <!--<Grid>-->
+    
     <DockPanel LastChildFill="True">
         <DockPanel LastChildFill="True" >
             <Grid DockPanel.Dock="Bottom" Margin="8,0,8,8">
@@ -62,62 +61,14 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="{Binding Name}" HorizontalAlignment="Left"/>
-                            <TextBlock Text="{Binding Done, Converter={StaticResource BoolToDoneConverter}}" HorizontalAlignment="Right" Grid.Column="1"/> <!-- -->
-
+                            <TextBlock Text="{Binding Done, Converter={StaticResource BoolToDoneConverter}}" HorizontalAlignment="Right" Grid.Column="1"/>
                         </Grid>
                         <!--</StackPanel>-->
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </DockPanel>
-        <!--<Grid x:Name="new_detailsGrid" Visibility="Collapsed" HorizontalAlignment="Left" Margin="2,31,0,0" Grid.RowSpan="2" VerticalAlignment="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Label Content="Date Add:" Grid.Column="0"  Grid.Row="0"/>
-            <DatePicker x:Name="new_dateAddDatePicker" Style="{StaticResource CustDatePicker}" Grid.Column="1" Grid.Row="0" 
-                        SelectedDate="{Binding DateAdd, Mode=TwoWay}" />
-            <Label Content="Date Complete:" Grid.Column="0" Grid.Row="1"/>
-            <DatePicker x:Name="new_dateCompleteDatePicker" Style="{StaticResource CustDatePicker}" Grid.Column="1" Grid.Row="1" 
-                        SelectedDate="{Binding DateComplete, Mode=TwoWay}" />
-            <Label Content="Done:" Grid.Column="0" Grid.Row="2"/>
-            <CheckBox x:Name="new_doneCheckBox" Style="{StaticResource CustCheckBox}" Grid.Column="1" Grid.Row="2" 
-                      IsChecked="{Binding Done, Mode=TwoWay}" />
-            <Label Content="Id:" Grid.Column="0" Grid.Row="3"/>
-            <TextBox x:Name="new_idTextBox" Style="{StaticResource CustTextBox}" Grid.Column="1" Grid.Row="3" 
-                     Text="{Binding Id, Mode=TwoWay}" />
-            <Label Content="Name:" Grid.Column="0" Grid.Row="4"/>
-            <TextBox x:Name="new_nameTextBox" Style="{StaticResource CustTextBox}" Grid.Column="1" Grid.Row="4" 
-                     Text="{Binding Name, Mode=TwoWay}" />
-            <Label Content="Text:" Grid.Column="0" Grid.Row="5"/>
-            <TextBox x:Name="new_textTextBox" Style="{StaticResource CustTextBox}" Grid.Column="1" Grid.Row="5" 
-                     Text="{Binding Text, Mode=TwoWay}"/>
-        </Grid>-->
-        <!--</Grid>-->
-        <!--<Grid x:Name="details" Margin="10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="35*"/>
-                <ColumnDefinition Width="251*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="5*"/>
-                <RowDefinition Height="52*"/>
-            </Grid.RowDefinitions>
-            <TextBlock Text="TODO:" TextAlignment="Center" Height="16" />
-            <TextBox x:Name="todoText" Grid.Column="1" Height="18" />
 
-            <TextBlock Text="Done?" TextAlignment="Center"  VerticalAlignment="Top" Grid.Row="1" Height="16" />
-            <CheckBox x:Name="isDoneCheckbox" Grid.Row="1" Grid.Column="1">
-            </CheckBox>-->
         <Grid x:Name="detailsGrid" DataContext="{StaticResource noteViewSource}"  Margin="2,31,0,0" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -146,7 +97,6 @@
             <Label Content="Date Complete:" Grid.Column="0" Grid.Row="4"/>
             <DatePicker x:Name="dateCompleteDatePicker" Style="{StaticResource CustDatePicker}" Grid.Column="1" Grid.Row="4" 
                         SelectedDate="{Binding DateComplete, Mode=TwoWay}" IsEnabled="False"/>
-
             <!--<Label Content="Id:" Grid.Column="0" Grid.Row="3"/>
             <TextBox x:Name="idTextBox" Style="{StaticResource CustTextBox}" Grid.Column="1" Grid.Row="3" 
                      Text="{Binding Id, Mode=TwoWay}" />-->

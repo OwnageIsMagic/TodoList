@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -15,7 +14,6 @@ using System.Windows.Shapes;
 
 using System.Data.Entity;
 using System.ComponentModel;
-using System.Globalization;
 
 namespace TodoList
 {
@@ -32,13 +30,9 @@ namespace TodoList
 
         private void add_Click(object sender, RoutedEventArgs e)
         {
-            //using (var db = new TodoModelContainer())
-            {
                 db.Notes.Add(new Note { Name = "New note", DateAdd = DateTime.Now, Done = false });
                 todoList.SelectedIndex = todoList.Items.Count - 1;
                 db.SaveChanges();
-            }
-
         }
 
         private void delete_Click(object sender, RoutedEventArgs e)
@@ -81,16 +75,6 @@ namespace TodoList
         private void todoList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             db.SaveChanges();
-            //if (e.AddedItems[0] is Note note)
-            //{
-            //    dateCompleteDatePicker.IsEnabled = note.Done;
-            //}
         }
-    }
-    class BoolToDoneConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => (bool)value ? "✔" : "";
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
     }
 }

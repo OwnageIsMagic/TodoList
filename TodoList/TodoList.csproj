@@ -66,6 +66,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BoolToDoneConverter.cs" />
     <Compile Include="Note.cs">
       <DependentUpon>TodoModel.tt</DependentUpon>
     </Compile>
