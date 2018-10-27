@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 using System.Data.Entity;
 using System.ComponentModel;
+using System.Globalization;
 
 namespace TodoList
 {
@@ -67,16 +68,29 @@ namespace TodoList
 
         private void doneCheckBox_Click(object sender, RoutedEventArgs e)
         {
-            dateCompleteDatePicker.SelectedDate = DateTime.Now;
+
+            if (((CheckBox)sender).IsChecked != true)
+            {
+                dateCompleteDatePicker.SelectedDate = default;
+            }
+            else
+                dateCompleteDatePicker.SelectedDate = DateTime.Now;
+
         }
 
         private void todoList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             db.SaveChanges();
-            if (e.AddedItems[0] is Note note)
-            {
-                dateCompleteDatePicker.IsEnabled = note.Done;
-            }
+            //if (e.AddedItems[0] is Note note)
+            //{
+            //    dateCompleteDatePicker.IsEnabled = note.Done;
+            //}
         }
+    }
+    class BoolToDoneConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => (bool)value ? "✔" : "";
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
     }
 }

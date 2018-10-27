@@ -6,13 +6,15 @@
         xmlns:local="clr-namespace:TodoList"
         xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:ComponentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase" x:Class="TodoList.MainWindow"
         mc:Ignorable="d"
-        Title="TODO List" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="TODO List" Height="450" Width="800" Loaded="Window_Loaded" SizeToContent="Width" ResizeMode="NoResize">
     <Window.Resources>
         <CollectionViewSource x:Key="noteViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Note}, CreateList=True}" IsLiveSortingRequested="True">
             <CollectionViewSource.SortDescriptions>
                 <ComponentModel:SortDescription Direction="Ascending" PropertyName="DateAdd"/>
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
+        <local:BoolToDoneConverter x:Key="BoolToDoneConverter" />
+        
         <Style TargetType="{x:Type Label}">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -49,12 +51,23 @@
                 <Button x:Name="add" Width="60" HorizontalAlignment="Left" Click="add_Click" Content="Add"/>
                 <Button x:Name="delete" Width="60" HorizontalAlignment="Right" Click="delete_Click" Content="Delete"/>
             </Grid>
-            <ListBox x:Name="todoList" Width="200" Margin="0,0,0,16" DataContext="{StaticResource noteViewSource}" ItemsSource="{Binding}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectionChanged="todoList_SelectionChanged">
-                <!--<ListBox.ItemTemplate>
+            <ListBox x:Name="todoList" Width="200" Margin="0,0,0,16" DataContext="{StaticResource noteViewSource}" ItemsSource="{Binding}" SelectedValuePath="Id" SelectionChanged="todoList_SelectionChanged">
+                <!--DisplayMemberPath="Name"-->
+                <ListBox.ItemTemplate>
                     <DataTemplate>
-                        
+                        <!--<StackPanel>-->
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Name}" HorizontalAlignment="Left"/>
+                            <TextBlock Text="{Binding Done, Converter={StaticResource BoolToDoneConverter}}" HorizontalAlignment="Right" Grid.Column="1"/> <!-- -->
+
+                        </Grid>
+                        <!--</StackPanel>-->
                     </DataTemplate>
-                </ListBox.ItemTemplate>-->
+                </ListBox.ItemTemplate>
             </ListBox>
         </DockPanel>
         <!--<Grid x:Name="new_detailsGrid" Visibility="Collapsed" HorizontalAlignment="Left" Margin="2,31,0,0" Grid.RowSpan="2" VerticalAlignment="Top">
@@ -132,7 +145,7 @@
                         SelectedDate="{Binding DateAdd, Mode=TwoWay}" />
             <Label Content="Date Complete:" Grid.Column="0" Grid.Row="4"/>
             <DatePicker x:Name="dateCompleteDatePicker" Style="{StaticResource CustDatePicker}" Grid.Column="1" Grid.Row="4" 
-                        SelectedDate="{Binding DateComplete, Mode=TwoWay}" />
+                        SelectedDate="{Binding DateComplete, Mode=TwoWay}" IsEnabled="False"/>
 
             <!--<Label Content="Id:" Grid.Column="0" Grid.Row="3"/>
             <TextBox x:Name="idTextBox" Style="{StaticResource CustTextBox}" Grid.Column="1" Grid.Row="3" 
