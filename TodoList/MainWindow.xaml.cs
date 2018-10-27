@@ -27,38 +27,26 @@ namespace TodoList
         public MainWindow()
         {
             InitializeComponent();
-            Populate();
-            //todoList.DataContext = new TodoModelContainer();
-        }
-        private void Populate()
-        {
-            //using (var db = new TodoModelContainer()) {
-            //db.Notes.Add(new Note { Name = "n1", DateAdd = DateTime.Now, Done = false });
-            //db.SaveChanges();
-            //}
         }
 
         private void add_Click(object sender, RoutedEventArgs e)
         {
             //using (var db = new TodoModelContainer())
             {
-                db.Notes.Add(new Note { Name = "n1", DateAdd = DateTime.Now, Done = false });
-                //db.SaveChanges();
+                db.Notes.Add(new Note { Name = "New note", DateAdd = DateTime.Now, Done = false });
+                todoList.SelectedIndex = todoList.Items.Count - 1;
+                db.SaveChanges();
             }
 
         }
 
         private void delete_Click(object sender, RoutedEventArgs e)
         {
-            //using (var db = new TodoModelContainer())
-            //{
-            //todoList.Items.Clear();
-            //foreach (var n in /*new List<int> { 1, 2, 4, 7 }*/ db.Notes)
-            //{
-            //    todoList.Items.Add(n);
-            //}
-            //MessageBox.Show(todoList.Items.IsEmpty ? "empty" : "NOTEMPTY");
-            //}
+            if (todoList.SelectedItem is Note note)
+            {
+                db.Notes.Remove(note);
+                db.SaveChanges();
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -75,6 +63,20 @@ namespace TodoList
             base.OnClosing(e);
             db.SaveChanges();
             db.Dispose();
+        }
+
+        private void doneCheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            dateCompleteDatePicker.SelectedDate = DateTime.Now;
+        }
+
+        private void todoList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            db.SaveChanges();
+            if (e.AddedItems[0] is Note note)
+            {
+                dateCompleteDatePicker.IsEnabled = note.Done;
+            }
         }
     }
 }
